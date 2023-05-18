@@ -42,7 +42,6 @@
 
 /* Begin PBXFileReference section */
 		842529D52A14A939007B779C /* EmployeeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeCell.swift; sourceTree = "<group>"; };
-		842529ED2A1611D0007B779C /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		84343A972A1302A700BDCD90 /* SquareupChallengeProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SquareupChallengeProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84343A9A2A1302A700BDCD90 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84343A9C2A1302A700BDCD90 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -142,7 +141,6 @@
 				84343AA32A1302A800BDCD90 /* Assets.xcassets */,
 				84343AA52A1302A800BDCD90 /* LaunchScreen.storyboard */,
 				84343AA82A1302A800BDCD90 /* Info.plist */,
-				842529ED2A1611D0007B779C /* Readme.md */,
 			);
 			path = SquareupChallengeProject;
 			sourceTree = "<group>";
