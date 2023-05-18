@@ -10,27 +10,109 @@ import XCTest
 
 final class SquareupChallengeProjectTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    let viewModel = EmployeeViewModel()
+    
+    /// Test cases for get all employees
+    ///
+    func testForReturnEmployeeWhenEmployeeApi() {
+        let expectation = self.expectation(description: "Returns_ListOfEmployeesResponse")
+        
+        viewModel.getEmployees(baseUrl: viewModel.employeesURL) { isSuccess, errorMessage in
+            
+            let employees = self.viewModel.employees
+            
+            XCTAssertNotNil(employees)
+            XCTAssertNil(errorMessage)
+            XCTAssertNotNil(employees?.count)
+            
+            expectation.fulfill()
         }
+        
+        waitingLoadingTime()
+    }
+    /// Test cases for get Malformed employees
+    ///
+    func testForMalformedEmployeeWhenUrlHaveMalformedEmployeesList() {
+        let expectation = self.expectation(description: "Returns_ListOfMalformedEmployeesResponse")
+        
+        viewModel.getEmployees(baseUrl: viewModel.malformedEmployeesURL) { isSuccess, errorMessage in
+            
+            let employees = self.viewModel.employees
+            
+            XCTAssertNotNil(errorMessage)
+            XCTAssertNil(employees)
+            XCTAssertNil(employees?.count)
+            XCTAssertEqual(errorMessage, "You have Malformed Empployee")
+            
+            expectation.fulfill()
+        }
+        
+        waitingLoadingTime()
+    }
+    
+    /// This test case fill fail when you changed the employe data in backend
+    ///
+    func testForReturnEmptyEMployeWhenYouNoEmployeesInList() {
+        let expectation = self.expectation(description: "Returns_EmptyEmployeesResponse")
+        
+        viewModel.getEmployees(baseUrl: viewModel.emptyEmployeURL) { isSuccess, errorMessage in
+            
+            let employees = self.viewModel.employees
+            
+            XCTAssertNotNil(employees)
+            XCTAssertNil(errorMessage)
+            XCTAssertEqual(employees?.count, 0)
+            
+            expectation.fulfill()
+        }
+        
+        waitingLoadingTime()
     }
 
+    /// Test cases for get Empty employees
+    ///
+    func testForIsEmptyEmployeeReturnFalseWhenYouHaveEmployees() {
+        let expectation = self.expectation(description: "Returns_ListOfEmployeesResponse")
+        viewModel.getEmployees(baseUrl: viewModel.employeesURL) { isSuccess, errorMessage in
+            expectation.fulfill()
+        }
+        waitingLoadingTime()
+        
+        XCTAssertEqual(viewModel.isEmptyEmployees, false)
+    }
+    
+    func testForIsEmptyEmployeeReturnTrueWhenYouHaveEmployees() {
+        let expectation = self.expectation(description: "Returns_ListOfEmployeesResponse")
+        viewModel.getEmployees(baseUrl: viewModel.emptyEmployeURL) { isSuccess, errorMessage in
+            expectation.fulfill()
+        }
+        waitingLoadingTime()
+        
+        XCTAssertEqual(viewModel.isEmptyEmployees, true)
+    }
+    
+    func testForSortedEmployeesBasedOnName() {
+        let expectation = self.expectation(description: "Returns_ListOfEmployeesResponse")
+        viewModel.getEmployees(baseUrl: viewModel.employeesURL) { isSuccess, errorMessage in
+            expectation.fulfill()
+        }
+        waitingLoadingTime()
+        
+        viewModel.sortedEmployeeBasedOnNames()
+        
+        let firstEmployee = viewModel.employees?.first
+        
+        XCTAssertEqual(firstEmployee?.fullName, "Alaina Daly")
+        XCTAssertEqual(firstEmployee?.phoneNumber, "5555442937")
+        XCTAssertEqual(firstEmployee?.emailAddress, "adaly.demo@squareup.com")
+        XCTAssertEqual(firstEmployee?.team, "Retail")
+        XCTAssertEqual(firstEmployee?.employeeType.description, "Full Time")
+        
+    }
+    
+    //MARK:- Private methods
+    
+    private func waitingLoadingTime() {
+        waitForExpectations(timeout: 5, handler: nil) //MARK:- For api call waiting time
+    }
 }
