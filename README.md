@@ -45,14 +45,7 @@ Better design and animations.
 Not that I know off. Tried best to build it properly in the given time frame.
 
 ## Did you copy any code or dependencies? Please make sure to attribute them here!
-Added SDWebImage
-let package = Package(
-    // 5.1.0 ..< 6.0.0
-    dependencies: [
-        .package(url: "https://github.com/SDWebImage/SDWebImage.git", from: "5.1.0")
-    ],
-    // ...
-)
+Added SDWebImage for image loading and caching.
 
 ## Is there any other information you’d like us to know?
 Thanks for your time to get to know about me(using my code). I would be open to learn about the assessment or any things to make it better.
