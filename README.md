@@ -13,8 +13,8 @@ Install the Xcode.
 
 Download the code from github as zip or clone it.
 
->>Zip file -- Unzip and double click it and it will extract the project.
->>Git clone -- You have the project. 
+1. Zip file -- Unzip and double click it and it will extract the project.
+2. Git clone -- You have the project. 
 
 SquareupChallengeProject -> SquareupChallengeProject.xcodeproj
 
